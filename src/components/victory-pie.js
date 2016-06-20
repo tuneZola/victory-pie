@@ -288,7 +288,13 @@ export default class VictoryPie extends React.Component {
      * @example <VictoryContainer title="Chart of Dog Breeds" desc="This chart shows how
      * popular each dog breed is by percentage in Seattle." />
      */
-    containerComponent: PropTypes.element
+    containerComponent: PropTypes.element,
+    /**
+     * The groupComponent prop takes an entire component which will be used to
+     * create group elements for use within container elements. This prop defaults
+     * to a <g> tag on web, and a react-native-svg <G> tag on mobile
+     */
+    groupComponent: PropTypes.element
   };
 
   static defaultProps = {
@@ -321,7 +327,8 @@ export default class VictoryPie extends React.Component {
     y: "y",
     dataComponent: <Slice/>,
     labelComponent: <VictoryLabel/>,
-    containerComponent: <VictoryContainer/>
+    containerComponent: <VictoryContainer/>,
+    groupComponent: <g/>
   };
 
   static getBaseProps = partialRight(PieHelpers.getBaseProps.bind(PieHelpers), defaultStyles);
@@ -381,15 +388,12 @@ export default class VictoryPie extends React.Component {
       }
     });
 
-    if (sliceLabelComponents.length > 0) {
-      return (
-        <g key={`pie-group`}>
-          {sliceComponents}
-          {sliceLabelComponents}
-        </g>
-      );
-    }
-    return sliceComponents;
+    return sliceLabelComponents.length > 0 ?
+      React.cloneElement(
+        props.groupComponent,
+        {key: "pie-group"},
+        [...sliceComponents, ...sliceLabelComponents]
+      ) : sliceComponents;
   }
 
   renderContainer(props, group) {
@@ -430,10 +434,10 @@ export default class VictoryPie extends React.Component {
     const { style, padding, radius } = calculatedProps;
     const xOffset = radius + padding.left;
     const yOffset = radius + padding.top;
-    const group = (
-      <g role="presentation" style={style.parent} transform={`translate(${xOffset}, ${yOffset})`}>
-        {this.renderData(this.props, calculatedProps)}
-      </g>
+    const group = React.cloneElement(
+      this.props.groupComponent,
+      { role: "presentation", style: style.parent, transform: `translate(${xOffset}, ${yOffset})` },
+      this.renderData(this.props, calculatedProps)
     );
 
     return this.props.standalone ? this.renderContainer(this.props, group) : group;
