@@ -24,13 +24,15 @@
     "test": "builder run check",
     "version": "builder run npm:version && git add dist && git commit -m \"Commit 'dist/' for publishing\"",
     "docs-build-static": "echo 'Static docs generation for victory-pie is not supported",
-    "storybook": "start-storybook -p 3001"
-  },
+    "storybook": "start-storybook -p 3001",
+    "start-native": "./node_modules/react-native/packager/packager.sh start --reset-cache --projectRoots `pwd`,`pwd`/demo"
+ },
   "dependencies": {
     "builder-victory-component": "git+https://github.com/vakhtang/builder-victory-component.git#native",
     "builder": "~2.9.1",
     "d3-shape": "^0.6.0",
     "lodash": "^4.12.0",
+    "react-native-svg": "^2.1.0",
     "victory-core": "git+https://github.com/FormidableLabs/victory-core.git#supportNative"
   },
   "devDependencies": {
@@ -45,6 +47,7 @@
     "react": "~15.1.0",
     "react-addons-test-utils": "~15.1.0",
     "react-dom": "~15.1.0",
+    "react-native": "^0.27.0",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0"
   }
