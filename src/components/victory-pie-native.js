@@ -1,6 +1,6 @@
 import React from "react";
 import { G } from "react-native-svg";
-import { default as VictoryPie } from "./victory-pie";
+import VictoryPie from "./victory-pie";
 import { default as Slice } from "./native-slice";
 import { VictoryLabelNative, VictoryContainerNative } from "victory-core";
 
