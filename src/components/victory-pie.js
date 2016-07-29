@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import { defaults, isFunction, partialRight } from "lodash";
+
 import {
   PropTypes as CustomPropTypes,
   Events,
@@ -9,6 +9,10 @@ import {
 } from "victory-core";
 import Slice from "./slice";
 import PieHelpers from "./helper-methods";
+
+import defaults from "lodash/defaults";
+import isFunction from "lodash/isFunction";
+import partialRight from "lodash/partialRight";
 
 const fallbackProps = {
   style: {
