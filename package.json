@@ -1,6 +1,6 @@
 {
   "name": "tune-victory-pie",
-  "version": "4.2.01",
+  "version": "4.2.03",
   "description": "D3 pie & donut chart component for React",
   "main": "lib/index.js",
   "repository": {

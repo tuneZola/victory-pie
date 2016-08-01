@@ -1,7 +1,7 @@
 import d3Shape from "d3-shape";
 import { Helpers, Events, Style } from "victory-core";
 import omit from "lodash/omit";
-import assign from "lodash/assign";
+import assign from "lodash.assign";
 import defaults from "lodash/defaults";
 import isFunction from "lodash/isFunction";
 export default {
